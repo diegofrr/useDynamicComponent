@@ -30,7 +30,7 @@ export const useDynamicComponent = <T>({ loader, exportName, defaultLoad, onLoad
     try {
       const mod = await loader();
       const modName = Object.keys(mod)[0];
-      const LoadedComponent = exportName ? mod[exportName] : mod[modName] || mod.default;
+      const LoadedComponent = exportName && mod[exportName] ? mod[exportName] : mod[modName] || mod.default;
 
       if (!LoadedComponent) {
         throw new Error(`Component ${exportName} not found. Loaded modules: ${Object.keys(mod).join(', ')}`);
