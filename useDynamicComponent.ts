@@ -37,12 +37,12 @@ export const useDynamicComponent = <T>({ loader, exportName, defaultLoad, onLoad
       }
 
       setComponent(() => LoadedComponent);
+      setIsLoaded(true);
     } catch (err) {
       setError(err as Error);
       console.error('Failed to load component', err);
     } finally {
       setIsLoading(false);
-      setIsLoaded(true);
       onLoad?.();
     }
   }, [isLoaded, isLoading, loader, exportName, onLoad]);
