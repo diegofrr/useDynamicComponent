@@ -4,9 +4,13 @@ A React custom hook for dynamically loading components.
 ### Usage example
 
 ```typescript
+'use client';
+
+import { useDynamicComponent } from './useDynamicComponent';
+
 export const Example = () => {
   const { Component, load, isLoading, error } = useDynamicComponent({
-    loader: () => import('@/components/shared/inactive-badge'),
+    loader: () => import('./MyComponent'),
   });
 
   return (
