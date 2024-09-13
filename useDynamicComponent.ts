@@ -1,13 +1,12 @@
 import { ComponentType, useCallback, useEffect, useState } from 'react';
 
-type DynamicComponentProps<T> = {
-  loader: () => Promise<{ [key: string]: ComponentType<T> }>;
+type DynamicComponentOptions = {
   defaultLoad?: boolean;
   exportName?: string;
   onLoad?: () => void;
 };
 
-type DynamicComponentResult<T> = {
+type DynamicComponentOutput<T> = {
   Component?: ComponentType<T>;
   load: () => Promise<void>;
   isLoading: boolean;
@@ -15,7 +14,10 @@ type DynamicComponentResult<T> = {
   error?: Error;
 };
 
-export const useDynamicComponent = <T>({ loader, exportName, defaultLoad, onLoad }: DynamicComponentProps<T>): DynamicComponentResult<T> => {
+export const useDynamicComponent = <T>(
+  loader: () => Promise<{ [key: string]: ComponentType<T> }>,
+  { defaultLoad, exportName, onLoad }: DynamicComponentOptions = {},
+): DynamicComponentOutput<T> => {
   const [Component, setComponent] = useState<ComponentType<T>>();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);

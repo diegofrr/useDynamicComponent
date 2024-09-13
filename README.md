@@ -9,9 +9,7 @@ A React custom hook for dynamically loading components.
 import { useDynamicComponent } from './useDynamicComponent';
 
 export const Example = () => {
-  const { Component, load, isLoading, error } = useDynamicComponent({
-    loader: () => import('./MyComponent'),
-  });
+  const { Component, load, isLoading, error } = useDynamicComponent(() => import('./MyComponent'));
 
   return (
     <div>
